@@ -1,16 +1,8 @@
-<html>
-<head>
-   <title>Studi Kasus</title>
-      <script language="JavaScript">
-      function konfirmasi(id)
-    {
-        tanya = confirm('Anda yakin ingin menghapus data dengan NIM '+ id + '?');
-        if (tanya == true)
-            return true;
-        else
-            return false;
-    }
- </script>
+<!DOCTYPE html >
+ <html>
+ <head>
+ 
+ <title>Hapus</title>
 
  </head>
 
@@ -50,7 +42,7 @@
       <td><?php echo $id; ?></td>
       <td><?php echo $nama; ?></td>
       <td><?php echo $alamat; ?></td>
-      <td><?php echo "<a href=\"".$_SERVER['PHP_SELF']."?id=$id\" onclick=\"return konfirmasi('$id')\">Delete</a>"; ?></td>
+      <td><?php echo "<a href=\"".$_SERVER['PHP_SELF']."?id=$id\">Delete</a>"; ?></td>
     </tr>
     <?php
     }
@@ -58,6 +50,6 @@
   </table>
  </form>
  <a href ="index.php"> Kembali ke Halaman Utama</a>
- <a href="?m=logout">Logout</a>
+ <a href="logout.php">Logout</a>
  </body>
  </html>

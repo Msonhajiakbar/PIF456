@@ -1,10 +1,17 @@
-<html>
+<!DOCTYPE html >
+ <html>
+ <head>
+ 
+ <title>Hapus Dengan Konfirmasi</title>
+
+ <script language="JavaScript">
+ <html>
 <head>
    <title>Studi Kasus</title>
       <script language="JavaScript">
       function konfirmasi(id)
     {
-        tanya = confirm('Anda yakin ingin menghapus data dengan NIM '+ id + '?');
+        tanya = confirm('Yakin ingin menghapus '+ id + '?');
         if (tanya == true)
             return true;
         else

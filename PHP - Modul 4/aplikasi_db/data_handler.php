@@ -4,9 +4,7 @@ function data_handler($root) {
                 data_editor($root);
                 return;
         }
-        $sql = 'SELECT COUNT(*) AS total FROM ' . MHS;
-        $res = mysql_query($sql);
-                
+        $res = mysql_query("SELECT count(*) AS total FROM " . mhs );
         if(mysql_num_rows($res)) {
                 if(isset($_GET['act']) && $_GET['act'] != '') {
                         switch ($_GET['act']) {
@@ -17,7 +15,6 @@ function data_handler($root) {
                                                 show_admin_data($root);
                                         }
                                         break;
-                                                                                
                                 case 'view':
                                         if (isset($_GET['id']) && ctype_digit($_GET['id'])) {
                                                 data_detail($root, $_GET['id'], 1);
@@ -25,12 +22,11 @@ function data_handler($root) {
                                                 show_admin_data($root);
                                         }
                                         break;
-                                                                                
                                 case 'del':
                                         if (isset($_GET['id']) && ctype_digit($_GET['id'])) {
                                                 $id = $_GET['id'];
-                                                $sql = "DELETE FROM mahasiswa WHERE nim='$id'"; 
-                                                $res = mysql_query($sql);
+                                                $ok = "DELETE FROM mahasiswa WHERE nim='$id'"; 
+                                                $res = mysql_query($ok);
                                                 if ($res) {
                                                         
                                                         ?>
@@ -59,7 +55,7 @@ function data_handler($root) {
 function show_admin_data($root) { ?>
         <h2 class="heading"> Administrasi Data</h2>
         <?php
-        $sql = 'SELECT nim, nama, alamat FROM ' . MHS;
+        $sql = 'SELECT nim, nama, alamat FROM maha';
         $res = mysql_query($sql);
 
         if($res) {
@@ -93,7 +89,7 @@ function show_admin_data($root) { ?>
                                         <td align="center">
                                         |<a href ="<?php echo $root;?>&amp;act=edit&amp;id=<?php echo $id;?>">
                                         Edit</a> | 
-										<a href ="hapus.php"> hapus
+                                        <a href ="<?php echo $root;?>&amp;act=del&amp;id=<?php echo $id;?>"> Hapus
                                         </td>
                                 </tr>
                                 <?php
@@ -111,35 +107,33 @@ function show_admin_data($root) { ?>
 }
 
 function data_detail($root, $id) {
-        $sql = 'SELECT nim, nama, alamat
-                        FROM '. MHS . 
-                        ' WHERE nim=' . $id;
+        $sql = "SELECT nim, nama, alamat FROM mahasiswa WHERE nim ='$id'";
         $res = mysql_query($sql);
         if($res) {
                 if (mysql_num_rows($res)) { ?>
                         <div class="tabel">
-                        <table border=1 width=700 cellpadding=4 cellspacing=0>
+                                <table border=1 width=700 cellpadding=4 cellspacing=0>
+                                        <?php
+                                        $row = mysql_fetch_row($res); ?>
+                                        <tr>
+                                                <td>NIM</td>
+                                                <td><?php echo $row[0];?></td>
+                                        </tr>        
+                                        <tr>
+                                                <td>Nama</td>
+                                                <td><?php echo $row[1];?></td>
+                                        </tr>
+                                        <tr>
+                                                <td>Alamat</td>
+                                                <td><?php echo $row[2];?></td>
+                                        </tr>
+                                </table>
+                        </div>
                         <?php
-                        $row = mysql_fetch_row($res); ?>
-                        <tr>
-                                <td> NIM </td>
-                                <td><?php echo $row[0];?></td>
-                        </tr>
-                        <tr>
-                                <td> NAMA</td>
-                                <td><?php echo $row[1];?></td>
-                        </tr>
-                        <tr>
-                                <td> Alamat </td>
-                                <td><?php echo $row[2];?></td>
-                        </tr>
-                </table>
-                </div>
-                <?php
                 } else {
-                        echo 'Data tidak ditemukan'; 
+                        echo 'Data Tidak Ditemukan';
                 }
-                mysql_close($res);
+                mysql_close();
         }
 }
 
@@ -147,8 +141,8 @@ function data_editor($root, $id = 0) {
         $view = true;
         if(isset($_POST['nim']) && $_POST['nim']) {
                 if (!$id) {
-                        $nim = $_POST['nim'];
-                        $nama = $_POST['nama'];
+                        $nim         = $_POST['nim'];
+                        $nama         = $_POST['nama'];
                         $alamat = $_POST['alamat'];
                         $res = mysql_query("INSERT INTO mahasiswa VALUES ('".$nim."', '" .$nama."', '" .$alamat."')");
                         if($res) { ?>
@@ -156,22 +150,18 @@ function data_editor($root, $id = 0) {
                         document.location.href="<?php echo $root;?>";
                         </script>
                 <?php
-                } else 
-                                {
+                } else {
                         echo 'Gagal menambah data';
                 }
-                } else 
-                                {
-                    $nim = $_POST['nim'];
-                    $nama = $_POST['nama'];
-                    $alamat = $_POST['alamat'];
-                    $res = mysql_query("UPDATE mahasiswa SET nim='$nim', nama='$nama', alamat='$alamat' WHERE nim='$id'");
-                    if ($res) 
-                                        { ?>
-                                        <?php
-                } 
-                                else 
-                                {
+                } else {
+                        $nim         = $_POST['nim'];
+                        $nama         = $_POST['nama'];
+                        $alamat = $_POST['alamat'];
+                        $res = mysql_query("UPDATE mahasiswa SET nim='$nim', nama='$nama', alamat='$alamat' WHERE nim='$id'");
+                        if ($res) { ?>
+
+                <?php
+                } else {
                         echo 'Gagal Modifikasi';
                 }
                 }
@@ -223,4 +213,5 @@ function data_editor($root, $id = 0) {
         }
         return false;
         }
+
 ?>

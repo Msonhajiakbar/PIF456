@@ -1,10 +1,17 @@
-<html>
+<!DOCTYPE html >
+ <html>
+ <head>
+ 
+ <title>Hapus Dengan Konfirmasi</title>
+
+ <script language="JavaScript">
+ <html>
 <head>
    <title>Studi Kasus</title>
       <script language="JavaScript">
       function konfirmasi(id)
     {
-        tanya = confirm('Anda yakin ingin menghapus data dengan NIM '+ id + '?');
+        tanya = confirm('Yakin ingin menghapus '+ id + '?');
         if (tanya == true)
             return true;
         else
@@ -35,7 +42,7 @@
       <td>NIM</td>
       <td>Nama </td>
       <td>Alamat</td>
-          <td>Menu</td> 
+      <td>Menu</td> 
     </tr>
     <?php
         $sql = mysql_query("SELECT * FROM mahasiswa");
@@ -58,6 +65,6 @@
   </table>
  </form>
  <a href ="index.php"> Kembali ke Halaman Utama</a>
- <a href="?m=logout">Logout</a>
+ <a href="logout.php">Logout</a>
  </body>
  </html>

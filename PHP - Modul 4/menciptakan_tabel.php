@@ -5,9 +5,9 @@
 </head>
 <body>
 <?php
+error_reporting(0);
 require_once './koneksi.php';
 $sql = 'CREATE TABLE mahasiswa (
-47
 nim VARCHAR(12) NOT NULL,
 nama VARCHAR(40) NOT NULL,
 alamat VARCHAR(100),

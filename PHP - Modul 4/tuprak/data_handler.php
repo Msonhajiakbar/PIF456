@@ -198,7 +198,7 @@ function data_editor($root, $id = 0) {
                 }
                 ?>
                 <h2> <?php echo $id ? 'Edit' : 'Tambah';?> Data </h2>
-                <form action="" method="post">
+                <form method="post" action="index.php">
                         <table border=1 cellpadding=4 cellspacing=0>
                                 <tr>
                                         <td width=100>NIM*</td>

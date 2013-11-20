@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$database = "mydatabase";
+$database = "myweb";
 $cnn = mysql_connect($host, $user,$pass);
 if ($cnn) {
 echo 'koneksi berhasil';
